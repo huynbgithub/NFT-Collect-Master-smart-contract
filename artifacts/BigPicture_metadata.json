@@ -1,0 +1,62 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_image",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"BigPicture.sol": "BigPicture"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"BigPicture.sol": {
+			"keccak256": "0xf20a1f414bd95e8f4bb8facda5a1ff4530449d912174c5242e4865303fc64436",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bb16e43b47e586c76285a9d0a89ec2ba20ba6a66e4e128d54ffd08e21eefe33a",
+				"dweb:/ipfs/QmVVJ6naTCcvkgXKnX5AvL7Ny8E2mhQPqK3G9T4JDB7oMu"
+			]
+		}
+	},
+	"version": 1
+}
