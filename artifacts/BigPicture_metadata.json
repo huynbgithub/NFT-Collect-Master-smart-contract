@@ -19,12 +19,32 @@
 					},
 					{
 						"internalType": "contract Picture[]",
-						"name": "_picturePart",
+						"name": "_picturePieces",
 						"type": "address[]"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "createPictureToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllPictureTokens",
+				"outputs": [
+					{
+						"internalType": "contract PictureToken[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [],
@@ -44,7 +64,7 @@
 							},
 							{
 								"internalType": "contract Picture[]",
-								"name": "picturePart",
+								"name": "picturePieces",
 								"type": "address[]"
 							}
 						],
@@ -85,11 +105,11 @@
 	},
 	"sources": {
 		"BigPicture.sol": {
-			"keccak256": "0x75cf2ae0e6694dc2ce2d84e494271c2730229a2247b6849d6495b4f8b68868c8",
+			"keccak256": "0x9278ef8c91cbfffb44dfeece529085a3b2b35033ea90baaabe78cb02abdb86c6",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://75e79a5f9753f6b03960756e3d0720f12e16f27258838702dbc7c7597705df7e",
-				"dweb:/ipfs/QmNStWpVFQt5Ao4tL14o5B4KhyvcjCqjqtVEEPTtcgUyP7"
+				"bzz-raw://f893bf915fb3b66986eef873f729e3716d3de8759ae0ecd53682462c963cdb97",
+				"dweb:/ipfs/QmUoucAjZKS2GjeZp57d5AATHGgCDC2b3nSo6xeWc7TC4w"
 			]
 		},
 		"Picture.sol": {
@@ -98,6 +118,110 @@
 			"urls": [
 				"bzz-raw://c2462feddd4d167e3fba2995c76a0a8772af652b0500a0ef4bbf14fd75483992",
 				"dweb:/ipfs/Qmd8U3FqXxSz4xoqt5KAoVcoKPthKiuRLHGU7hptBSoQ4g"
+			]
+		},
+		"PictureToken.sol": {
+			"keccak256": "0x7c273490f815f96daf53ae98e8106b613572d970ac0364210705d7396acba1b8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5876ac0d04911e6aeb3578f5b10c28a97096fd0d066aa132af0f3e0a738d83ae",
+				"dweb:/ipfs/Qmerm6nhf8hxdNFCJpgTvMwSeJuVjoWJfsFptcTgJUWXtj"
+			]
+		},
+		"openzeppelin-contracts/contracts/access/Ownable.sol": {
+			"keccak256": "0xe889e9f6b8469155c967f403ad7508eaa66af8cad1cb9a003536a8e4f281d348",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e6e32c81c8d84199eda0de40d33bb77c7acbb482e3f545d5cfba8195af0a88e0",
+				"dweb:/ipfs/Qmaf1WAinzjYWGNxRzCTmn2QABFWS912HwC8eiD7cyTgis"
+			]
+		},
+		"openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol": {
+			"keccak256": "0xbd56d5c2cdbeb156c65a1a929f5ea9be5af3bde54244c8d8dcd7eb560512ed7d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://dc97f1f9f1a8162af5098a609cf9a62afc2856a042243ce274762709e223711b",
+				"dweb:/ipfs/QmTA2uoKWE1HyVGmdnGC5YNLuSBaPbDJVmmfUvvoEVN7Zj"
+			]
+		},
+		"openzeppelin-contracts/contracts/token/ERC721/ERC721.sol": {
+			"keccak256": "0xdde6917a300a3e655ca443b76266ce89145a7c9eb6a70298bf8aab4965bc40fc",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://39416f61b555df983b22c85803cbe7606fb7f2004b4dbbd51995c7dc552a7137",
+				"dweb:/ipfs/QmUG2ghvGz4iDLrvaUfEjcjn8qbvfcoi5AFpGW9t4cupGc"
+			]
+		},
+		"openzeppelin-contracts/contracts/token/ERC721/IERC721.sol": {
+			"keccak256": "0xb8745c44e53e2a74e9a5d97de4f91d065f1e05cc3e624639485e7b29fb73b728",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://76d9aba69c37eedb96c529c03c006e8c7f9ea3c2cc11635b21aedc0a65810cfd",
+				"dweb:/ipfs/QmUDZnzN5VAmQY6w2Vr6Uef6xNT5jFM9Grb4MUkECXWzjz"
+			]
+		},
+		"openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol": {
+			"keccak256": "0xa324c22ef2aaa7b7cd4db27007e7c6fc2d7877cc6381510fca9c83d72bb9ab3c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://acb98725687905d9183432eeaa3f7dca110b258ea403fd07b01fcc32ddb16d04",
+				"dweb:/ipfs/QmaWdFfHxZdggD16Hu3CgJ3dSGvQzsmovZBW3rorYh6S5N"
+			]
+		},
+		"openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+			"keccak256": "0x62e9e9e364dcd065b87229e727198f2ee8592c3c22010ead00f66cc370b6db43",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fda109e10a60e3ad248094787cffc42e12579215e30536d26c38cca922a951de",
+				"dweb:/ipfs/QmdAZxHrJpLj9nUvv61CV1QyCP28vvgJCva4e5949DqFNT"
+			]
+		},
+		"openzeppelin-contracts/contracts/utils/Context.sol": {
+			"keccak256": "0xa98ceb8734832ea51ee2ea6bafded757acaba7d232143ac9e50565760f7cf366",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://51854d853bb0a17e1d669a9f33699986d13ff42425c1e2eeea2ffc9190e6e42a",
+				"dweb:/ipfs/QmWwqcGd2pWwnBcKwBKC7CWYsSvtWUkZ1qJTSQ3fhednfA"
+			]
+		},
+		"openzeppelin-contracts/contracts/utils/Strings.sol": {
+			"keccak256": "0x53da138fbc253114bcb7593eff7a23bdffdfd1392137cd59e2dd90e423cb5f92",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a50918f60f4975d1342119a8decea30e44497d85a0f19aa9022666a295a37368",
+				"dweb:/ipfs/QmcSCczAJqotocW4pBJqtJawtd9ergdxiJ3vn2MqzxBaYz"
+			]
+		},
+		"openzeppelin-contracts/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0x5e93dc51cc1dd89d1ae31658302b93f7adef0eee525eafbc563195afc9345e39",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3fd926ba3c959be85a706285338cc7dde03af8ecb4e2a936f3bac18441abfe97",
+				"dweb:/ipfs/QmaSdTPxbPPscAxiNFqExm7dTuXp4VuBsiiuGcuk4euJie"
+			]
+		},
+		"openzeppelin-contracts/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x97a5e5c6659add3f13418d219e705d6cc732ca3c31b62a64d66f92b159c5375d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4a42c9e92e0b080329a3084019cc95423bdc4c5c20250a82e53d252650e79da9",
+				"dweb:/ipfs/QmXffSTGqZXofPd7ueueXQowGPTQr9DJvZEzQFmJKzB24N"
+			]
+		},
+		"openzeppelin-contracts/contracts/utils/math/Math.sol": {
+			"keccak256": "0x2c5cdfbc8308c34f76fc8fde760a72890e1178aedbeb3651662f177a2efe8e02",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2c3ae15eb2fd97ec390937660d1db1ce41a5c939ba5f5da0f359a1ba237ea063",
+				"dweb:/ipfs/QmXN2hveEkj9KsfSsNVodzxE626tmnpHK2SmjXDUP6arg1"
+			]
+		},
+		"openzeppelin-contracts/contracts/utils/math/SignedMath.sol": {
+			"keccak256": "0xd49b8824c2908c601bb2aa619e1331672c1d46f743bac0e23997766ea8bc16eb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6334c9e7fe628d4886a4f7f1dbb458dfe0ef401913b0e5ba59d565eba62db3cf",
+				"dweb:/ipfs/QmXcsGpRXBPb3S1kQ5cyt21UDBf7irkuwZMFv64gtbENy6"
 			]
 		}
 	},
