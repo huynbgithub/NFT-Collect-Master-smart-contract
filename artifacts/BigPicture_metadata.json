@@ -16,10 +16,45 @@
 						"internalType": "string",
 						"name": "_image",
 						"type": "string"
+					},
+					{
+						"internalType": "contract Picture[]",
+						"name": "_picturePart",
+						"type": "address[]"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "getSingleBigPicture",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "image",
+								"type": "string"
+							},
+							{
+								"internalType": "contract Picture[]",
+								"name": "picturePart",
+								"type": "address[]"
+							}
+						],
+						"internalType": "struct BigPictureData",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -50,11 +85,19 @@
 	},
 	"sources": {
 		"BigPicture.sol": {
-			"keccak256": "0xf20a1f414bd95e8f4bb8facda5a1ff4530449d912174c5242e4865303fc64436",
+			"keccak256": "0x75cf2ae0e6694dc2ce2d84e494271c2730229a2247b6849d6495b4f8b68868c8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bb16e43b47e586c76285a9d0a89ec2ba20ba6a66e4e128d54ffd08e21eefe33a",
-				"dweb:/ipfs/QmVVJ6naTCcvkgXKnX5AvL7Ny8E2mhQPqK3G9T4JDB7oMu"
+				"bzz-raw://75e79a5f9753f6b03960756e3d0720f12e16f27258838702dbc7c7597705df7e",
+				"dweb:/ipfs/QmNStWpVFQt5Ao4tL14o5B4KhyvcjCqjqtVEEPTtcgUyP7"
+			]
+		},
+		"Picture.sol": {
+			"keccak256": "0xd8e28d8bae57ff024405d7a15d498f592806d81c90a856791d212af293aebf14",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c2462feddd4d167e3fba2995c76a0a8772af652b0500a0ef4bbf14fd75483992",
+				"dweb:/ipfs/Qmd8U3FqXxSz4xoqt5KAoVcoKPthKiuRLHGU7hptBSoQ4g"
 			]
 		}
 	},

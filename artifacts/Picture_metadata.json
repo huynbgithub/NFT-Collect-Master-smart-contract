@@ -1,0 +1,62 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint8",
+						"name": "_order",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "_image",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Picture.sol": "Picture"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Picture.sol": {
+			"keccak256": "0xd8e28d8bae57ff024405d7a15d498f592806d81c90a856791d212af293aebf14",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c2462feddd4d167e3fba2995c76a0a8772af652b0500a0ef4bbf14fd75483992",
+				"dweb:/ipfs/Qmd8U3FqXxSz4xoqt5KAoVcoKPthKiuRLHGU7hptBSoQ4g"
+			]
+		}
+	},
+	"version": 1
+}

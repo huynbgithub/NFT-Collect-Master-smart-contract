@@ -16,6 +16,11 @@
 						"internalType": "string",
 						"name": "_image",
 						"type": "string"
+					},
+					{
+						"internalType": "contract Picture[]",
+						"name": "_picturePart",
+						"type": "address[]"
 					}
 				],
 				"name": "createBigPicture",
@@ -24,19 +29,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "deployedBigPictures",
+				"inputs": [],
+				"name": "getAllBigPictures",
 				"outputs": [
 					{
-						"internalType": "contract BigPicture",
+						"internalType": "contract BigPicture[]",
 						"name": "",
-						"type": "address"
+						"type": "address[]"
 					}
 				],
 				"stateMutability": "view",
@@ -71,19 +70,27 @@
 	},
 	"sources": {
 		"BigPicture.sol": {
-			"keccak256": "0xf20a1f414bd95e8f4bb8facda5a1ff4530449d912174c5242e4865303fc64436",
+			"keccak256": "0x2a66a5b5b6c76e68b14a3ef6b4411b73c95abbc7317cd830833a9f3891d7bdf7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bb16e43b47e586c76285a9d0a89ec2ba20ba6a66e4e128d54ffd08e21eefe33a",
-				"dweb:/ipfs/QmVVJ6naTCcvkgXKnX5AvL7Ny8E2mhQPqK3G9T4JDB7oMu"
+				"bzz-raw://f55fc05f0d4c293d7d96d8ed2469e2e11a201a3f690d5f58869a3ed4c58b728c",
+				"dweb:/ipfs/QmRntSGb7Q3w7R4YVmj2RkCvubPsikFYPWHDEoWV5UZr1E"
 			]
 		},
 		"BigPictureFactory.sol": {
-			"keccak256": "0x07df4b483074cb6c7989817608c5362ceb885ce15cc4448adf0f3aed0cfdc1c4",
+			"keccak256": "0x207a78c540922db6a3efc2e37fbf5059370116e65b4a54807bf712d170163dac",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6afb5f8c054ae989f374aee03598bf795196d684144623f6dea60f1f10d4d26e",
-				"dweb:/ipfs/QmSEn5NA1iSsZXjte8E21u7DagRuXW5aCn3oWg4RGW6tgG"
+				"bzz-raw://0a933a65058a9c682c6a12f75881e883ed83201873cdc6565f9be4f2d5635443",
+				"dweb:/ipfs/QmP32NDLvTmmcVpQtb1BiP5agoq2NGgMkGmfdj2xL5rQst"
+			]
+		},
+		"Picture.sol": {
+			"keccak256": "0xd8e28d8bae57ff024405d7a15d498f592806d81c90a856791d212af293aebf14",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c2462feddd4d167e3fba2995c76a0a8772af652b0500a0ef4bbf14fd75483992",
+				"dweb:/ipfs/Qmd8U3FqXxSz4xoqt5KAoVcoKPthKiuRLHGU7hptBSoQ4g"
 			]
 		}
 	},
