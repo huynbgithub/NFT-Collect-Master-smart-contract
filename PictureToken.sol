@@ -10,7 +10,7 @@ import "./Picture.sol";
 contract PictureToken is ERC721, Ownable {
 
     Picture props;
-    uint256 private price;
+    uint256 public price;
     bool onSale;
 
     constructor(address initialOwner, Picture _props)
@@ -26,27 +26,27 @@ contract PictureToken is ERC721, Ownable {
         return "ipfs://pieceTokenBaseURI";
     }
 
-    function getSinglePictureToken() private view returns(tokenData memory) {
+    function getSinglePictureToken() public view returns(tokenData memory) {
         return tokenData(Ownable.owner(), props, price, onSale);
     }
 
-    function getPrice() private view returns(uint256) {
+    function getPrice() public view returns(uint256) {
         return price;
     }
 
-    function setPrice(uint256 _price) private onlyOwner {
+    function setPrice(uint256 _price) public onlyOwner {
         price = _price;
     }
 
-    function putOnSale() private onlyOwner {
+    function putOnSale() public onlyOwner {
         onSale = true;
     }
 
-    function notPutOnSale() private onlyOwner {
+    function notPutOnSale() public onlyOwner {
         onSale = false;
     }
 
-    function purchase() private {
+    function purchase() public {
         payable(msg.sender).transfer(price);
         transferOwnership(msg.sender);
         price = 0;

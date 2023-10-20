@@ -43,7 +43,7 @@ contract BigPictureFactory {
         string memory _image,
         Picture[] memory _picturePart,
         uint256 _rewardPrice
-    ) private {
+    ) public {
         BigPicture newBigPicture = new BigPicture(
             _name,
             _image,

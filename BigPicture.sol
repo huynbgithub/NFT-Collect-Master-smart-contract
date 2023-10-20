@@ -48,14 +48,14 @@ contract BigPicture {
     }
 
     //Reward Winner
-    function tranferRewardToWinner(address winnerAddress) private {
-            payable(winnerAddress).transfer(rewardPrice);
-    }
+    // function tranferRewardToWinner(address winnerAddress) public {
+    //         payable(winnerAddress).transfer(rewardPrice);
+    // }
 
     //Find the winner
-    function findWinner() private {
-
-    }
+    // function findWinner() public {
+    // 
+    // }
  
 }
 

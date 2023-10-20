@@ -297,6 +297,54 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getSinglePictureToken",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "ownerAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "contract Picture",
+								"name": "props",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "onSale",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct tokenData",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -335,6 +383,13 @@
 			},
 			{
 				"inputs": [],
+				"name": "notPutOnSale",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -363,6 +418,33 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "price",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "purchase",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "putOnSale",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -437,6 +519,19 @@
 					}
 				],
 				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					}
+				],
+				"name": "setPrice",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -696,19 +791,19 @@
 	},
 	"sources": {
 		"Picture.sol": {
-			"keccak256": "0xd8e28d8bae57ff024405d7a15d498f592806d81c90a856791d212af293aebf14",
+			"keccak256": "0xdd2a48316a223d752facbae03ac785fc4f6ed10ed2c07e86c4e2ddf5af54fb5e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c2462feddd4d167e3fba2995c76a0a8772af652b0500a0ef4bbf14fd75483992",
-				"dweb:/ipfs/Qmd8U3FqXxSz4xoqt5KAoVcoKPthKiuRLHGU7hptBSoQ4g"
+				"bzz-raw://4b6033bd41caa124913572c56ce256d0591bcd6e5b815f372ca1a7f247d7a654",
+				"dweb:/ipfs/Qmf4DB3HJGpBAG243MKJDSkKxfGMbXNnhGTm27wqonZp2y"
 			]
 		},
 		"PictureToken.sol": {
-			"keccak256": "0x7c273490f815f96daf53ae98e8106b613572d970ac0364210705d7396acba1b8",
+			"keccak256": "0x6f1874053cdb9ccc71d0a3ce45574d2aacdffa1df18cd832d1b265f44bb67020",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5876ac0d04911e6aeb3578f5b10c28a97096fd0d066aa132af0f3e0a738d83ae",
-				"dweb:/ipfs/Qmerm6nhf8hxdNFCJpgTvMwSeJuVjoWJfsFptcTgJUWXtj"
+				"bzz-raw://304f98d44dc5bb5c5e061716fbc16f18c726ed661e2d8d152221a555af4c756b",
+				"dweb:/ipfs/QmWjU3cjAHeLq98wGF8g4dDNp9ByY2RU3f7K6za89U57q1"
 			]
 		},
 		"openzeppelin-contracts/contracts/access/Ownable.sol": {
