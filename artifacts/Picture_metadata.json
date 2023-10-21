@@ -8,11 +8,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_order",
-						"type": "uint256"
-					},
-					{
 						"internalType": "string",
 						"name": "_image",
 						"type": "string"
@@ -20,6 +15,19 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "getPicture",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -50,11 +58,11 @@
 	},
 	"sources": {
 		"Picture.sol": {
-			"keccak256": "0xdd2a48316a223d752facbae03ac785fc4f6ed10ed2c07e86c4e2ddf5af54fb5e",
+			"keccak256": "0xa78b9234ed301d0879a85240194a6530ac2e47727ec7a3234a6eb5a7d62969bf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4b6033bd41caa124913572c56ce256d0591bcd6e5b815f372ca1a7f247d7a654",
-				"dweb:/ipfs/Qmf4DB3HJGpBAG243MKJDSkKxfGMbXNnhGTm27wqonZp2y"
+				"bzz-raw://435605b186a146c2990ed4a143e50ed624db2a09e01d9ca4fb5ea380ec9bf830",
+				"dweb:/ipfs/QmUzpkV5HQWGtmci3b41BcH2pN1oDDg4SrXkDhgTLWZuUs"
 			]
 		}
 	},

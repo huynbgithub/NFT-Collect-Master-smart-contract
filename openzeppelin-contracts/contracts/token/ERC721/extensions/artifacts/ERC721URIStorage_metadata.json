@@ -9,22 +9,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "initialOwner",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "_image",
-						"type": "string"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "sender",
 						"type": "address"
 					},
@@ -125,28 +109,6 @@
 				"type": "error"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					}
-				],
-				"name": "OwnableInvalidOwner",
-				"type": "error"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
-					}
-				],
-				"name": "OwnableUnauthorizedAccount",
-				"type": "error"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -200,19 +162,32 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "previousOwner",
-						"type": "address"
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_fromTokenId",
+						"type": "uint256"
 					},
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_toTokenId",
+						"type": "uint256"
 					}
 				],
-				"name": "OwnershipTransferred",
+				"name": "BatchMetadataUpdate",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "MetadataUpdate",
 				"type": "event"
 			},
 			{
@@ -297,54 +272,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "getPrice",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getSinglePictureToken",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "address",
-								"name": "ownerAddress",
-								"type": "address"
-							},
-							{
-								"internalType": "string",
-								"name": "image",
-								"type": "string"
-							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							},
-							{
-								"internalType": "bool",
-								"name": "onSale",
-								"type": "bool"
-							}
-						],
-						"internalType": "struct tokenData",
-						"name": "",
-						"type": "tuple"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -382,26 +309,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "notPutOnSale",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -418,40 +325,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "price",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "purchase",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "putOnSale",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "renounceOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -519,19 +392,6 @@
 					}
 				],
 				"name": "setApprovalForAll",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_price",
-						"type": "uint256"
-					}
-				],
-				"name": "setPrice",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -609,22 +469,10 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "transferOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
+			"details": "ERC721 token with storage based token URI management.",
 			"errors": {
 				"ERC721IncorrectOwner(address,uint256,address)": [
 					{
@@ -692,16 +540,6 @@
 							"tokenId": "Identifier number of a token."
 						}
 					}
-				],
-				"OwnableInvalidOwner(address)": [
-					{
-						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
-					}
-				],
-				"OwnableUnauthorizedAccount(address)": [
-					{
-						"details": "The caller account is not authorized to perform an operation."
-					}
 				]
 			},
 			"events": {
@@ -710,6 +548,12 @@
 				},
 				"ApprovalForAll(address,address,bool)": {
 					"details": "Emitted when `owner` enables or disables (`approved`) `operator` to manage all of its assets."
+				},
+				"BatchMetadataUpdate(uint256,uint256)": {
+					"details": "This event emits when the metadata of a range of tokens is changed. So that the third-party platforms such as NFT market could timely update the images and related attributes of the NFTs."
+				},
+				"MetadataUpdate(uint256)": {
+					"details": "This event emits when the metadata of a token is changed. So that the third-party platforms such as NFT market could timely update the images and related attributes of the NFT."
 				},
 				"Transfer(address,address,uint256)": {
 					"details": "Emitted when `tokenId` token is transferred from `from` to `to`."
@@ -732,14 +576,8 @@
 				"name()": {
 					"details": "See {IERC721Metadata-name}."
 				},
-				"owner()": {
-					"details": "Returns the address of the current owner."
-				},
 				"ownerOf(uint256)": {
 					"details": "See {IERC721-ownerOf}."
-				},
-				"renounceOwnership()": {
-					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
 				},
 				"safeTransferFrom(address,address,uint256)": {
 					"details": "See {IERC721-safeTransferFrom}."
@@ -751,7 +589,7 @@
 					"details": "See {IERC721-setApprovalForAll}."
 				},
 				"supportsInterface(bytes4)": {
-					"details": "See {IERC165-supportsInterface}."
+					"details": "See {IERC165-supportsInterface}"
 				},
 				"symbol()": {
 					"details": "See {IERC721Metadata-symbol}."
@@ -761,9 +599,6 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See {IERC721-transferFrom}."
-				},
-				"transferOwnership(address)": {
-					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			},
 			"version": 1
@@ -776,7 +611,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"PictureToken.sol": "PictureToken"
+			"openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol": "ERC721URIStorage"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},
@@ -784,26 +619,34 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"PictureToken.sol": {
-			"keccak256": "0x3ed0d4002926ea3efa431264bc25fb9a16a24413a0e962f8f0923e57596c8600",
+		"openzeppelin-contracts/contracts/interfaces/IERC165.sol": {
+			"keccak256": "0x4764a3cb550846ec714888e19407f05c8d3cf56181d4a090f451beb8064b1a41",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b16ba72899dce8d184d9453fd94549932415d63ef56ef4511bfb7f525799301e",
-				"dweb:/ipfs/QmaztfhAYFCMpz3AtJAxpNeNwWgKM29pHqBRmjmfTTNpFp"
+				"bzz-raw://c0dfe15ab99b1ec4aec1d0c90dc077b27aab5a1a0d305c6c641698100fc27c64",
+				"dweb:/ipfs/QmWWsr2frKgKhNMJwdRXBe7vgRHCzSNTLyGMxbbc6Fuz81"
 			]
 		},
-		"openzeppelin-contracts/contracts/access/Ownable.sol": {
-			"keccak256": "0xe889e9f6b8469155c967f403ad7508eaa66af8cad1cb9a003536a8e4f281d348",
+		"openzeppelin-contracts/contracts/interfaces/IERC4906.sol": {
+			"keccak256": "0x7b29b3947e0a86bf596aa408b1395110a9a7fa31213dc928cf5ec927edff2585",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e6e32c81c8d84199eda0de40d33bb77c7acbb482e3f545d5cfba8195af0a88e0",
-				"dweb:/ipfs/Qmaf1WAinzjYWGNxRzCTmn2QABFWS912HwC8eiD7cyTgis"
+				"bzz-raw://d59b31e9c356988b8eb7bf63a4ea264f583dd0a62b86a163632c40bbe3aa7050",
+				"dweb:/ipfs/QmZBiYy7icKr5Lucb8yxujYfg3AMHW2zLD7n4JFYNVSinV"
+			]
+		},
+		"openzeppelin-contracts/contracts/interfaces/IERC721.sol": {
+			"keccak256": "0xdac767d30fc5b3ab8cb3238a18a86a6738f02ec8fad07b1cd74493c7212d3141",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c5142e04f3b754c3c24795000e10d90dbd5565499f1b019de9e9f6a847a219a0",
+				"dweb:/ipfs/QmS7VJ4LxS4F4okSxSu93ELv6irVCGfQDPDH3ENUz2rGYF"
 			]
 		},
 		"openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol": {
@@ -836,6 +679,14 @@
 			"urls": [
 				"bzz-raw://acb98725687905d9183432eeaa3f7dca110b258ea403fd07b01fcc32ddb16d04",
 				"dweb:/ipfs/QmaWdFfHxZdggD16Hu3CgJ3dSGvQzsmovZBW3rorYh6S5N"
+			]
+		},
+		"openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+			"keccak256": "0xea2ce2276d96ef81067a452a0c27f31bee2d3c47de47041fda9931c10e825523",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://29793c6d491ee3bf35f86ed717126830efc0309ac9d10f6c3059f4da0355fce7",
+				"dweb:/ipfs/QmUZV6nnQEXoiBDCgYSyPhSqLjAFJsrzghX5aqKWCrmxtH"
 			]
 		},
 		"openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
