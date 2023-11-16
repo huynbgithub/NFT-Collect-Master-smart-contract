@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.22+commit.4fc1097e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -18,9 +18,9 @@
 						"type": "string"
 					},
 					{
-						"internalType": "contract Picture[]",
+						"internalType": "string[]",
 						"name": "_picturePieces",
-						"type": "address[]"
+						"type": "string[]"
 					},
 					{
 						"internalType": "uint256",
@@ -37,10 +37,326 @@
 				"type": "constructor"
 			},
 			{
-				"inputs": [],
-				"name": "createPictureToken",
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "ERC721IncorrectOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC721InsufficientApproval",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "approver",
+						"type": "address"
+					}
+				],
+				"name": "ERC721InvalidApprover",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					}
+				],
+				"name": "ERC721InvalidOperator",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "ERC721InvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "ERC721InvalidReceiver",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					}
+				],
+				"name": "ERC721InvalidSender",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC721NonexistentToken",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "have",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "want",
+						"type": "address"
+					}
+				],
+				"name": "OnlyCoordinatorCanFulfill",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "approved",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_fromTokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_toTokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "BatchMetadataUpdate",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "MetadataUpdate",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getApproved",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -60,9 +376,14 @@
 								"type": "string"
 							},
 							{
-								"internalType": "contract Picture[]",
+								"internalType": "string[]",
 								"name": "picturePieces",
-								"type": "address[]"
+								"type": "string[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "rewardPrice",
+								"type": "uint256"
 							}
 						],
 						"internalType": "struct BigPictureData",
@@ -74,27 +395,491 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "getThisBigPictureAllTokens",
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					}
+				],
+				"name": "isApprovedForAll",
 				"outputs": [
 					{
-						"internalType": "contract PictureToken[]",
+						"internalType": "bool",
 						"name": "",
-						"type": "address[]"
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "mintCMT",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "ownerOf",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "randomIndex",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "randomWords",
+						"type": "uint256[]"
+					}
+				],
+				"name": "rawFulfillRandomWords",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "requestRandomWords",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sAccountId",
+				"outputs": [
+					{
+						"internalType": "uint64",
+						"name": "",
+						"type": "uint64"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sKeyHash",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenURI",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "winnerAddress",
+						"type": "address"
+					}
+				],
+				"name": "tranferRewardToWinner",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
+			"errors": {
+				"ERC721IncorrectOwner(address,uint256,address)": [
+					{
+						"details": "Indicates an error related to the ownership over a particular token. Used in transfers.",
+						"params": {
+							"owner": "Address of the current owner of a token.",
+							"sender": "Address whose tokens are being transferred.",
+							"tokenId": "Identifier number of a token."
+						}
+					}
+				],
+				"ERC721InsufficientApproval(address,uint256)": [
+					{
+						"details": "Indicates a failure with the `operator`’s approval. Used in transfers.",
+						"params": {
+							"operator": "Address that may be allowed to operate on tokens without being their owner.",
+							"tokenId": "Identifier number of a token."
+						}
+					}
+				],
+				"ERC721InvalidApprover(address)": [
+					{
+						"details": "Indicates a failure with the `approver` of a token to be approved. Used in approvals.",
+						"params": {
+							"approver": "Address initiating an approval operation."
+						}
+					}
+				],
+				"ERC721InvalidOperator(address)": [
+					{
+						"details": "Indicates a failure with the `operator` to be approved. Used in approvals.",
+						"params": {
+							"operator": "Address that may be allowed to operate on tokens without being their owner."
+						}
+					}
+				],
+				"ERC721InvalidOwner(address)": [
+					{
+						"details": "Indicates that an address can't be an owner. For example, `address(0)` is a forbidden owner in EIP-20. Used in balance queries.",
+						"params": {
+							"owner": "Address of the current owner of a token."
+						}
+					}
+				],
+				"ERC721InvalidReceiver(address)": [
+					{
+						"details": "Indicates a failure with the token `receiver`. Used in transfers.",
+						"params": {
+							"receiver": "Address to which tokens are being transferred."
+						}
+					}
+				],
+				"ERC721InvalidSender(address)": [
+					{
+						"details": "Indicates a failure with the token `sender`. Used in transfers.",
+						"params": {
+							"sender": "Address whose tokens are being transferred."
+						}
+					}
+				],
+				"ERC721NonexistentToken(uint256)": [
+					{
+						"details": "Indicates a `tokenId` whose `owner` is the zero address.",
+						"params": {
+							"tokenId": "Identifier number of a token."
+						}
+					}
+				],
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				]
+			},
+			"events": {
+				"Approval(address,address,uint256)": {
+					"details": "Emitted when `owner` enables `approved` to manage the `tokenId` token."
+				},
+				"ApprovalForAll(address,address,bool)": {
+					"details": "Emitted when `owner` enables or disables (`approved`) `operator` to manage all of its assets."
+				},
+				"BatchMetadataUpdate(uint256,uint256)": {
+					"details": "This event emits when the metadata of a range of tokens is changed. So that the third-party platforms such as NFT market could timely update the images and related attributes of the NFTs."
+				},
+				"MetadataUpdate(uint256)": {
+					"details": "This event emits when the metadata of a token is changed. So that the third-party platforms such as NFT market could timely update the images and related attributes of the NFT."
+				},
+				"Transfer(address,address,uint256)": {
+					"details": "Emitted when `tokenId` token is transferred from `from` to `to`."
+				}
+			},
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"approve(address,uint256)": {
+					"details": "See {IERC721-approve}."
+				},
+				"balanceOf(address)": {
+					"details": "See {IERC721-balanceOf}."
+				},
+				"getApproved(uint256)": {
+					"details": "See {IERC721-getApproved}."
+				},
+				"isApprovedForAll(address,address)": {
+					"details": "See {IERC721-isApprovedForAll}."
+				},
+				"name()": {
+					"details": "See {IERC721Metadata-name}."
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"ownerOf(uint256)": {
+					"details": "See {IERC721-ownerOf}."
+				},
+				"rawFulfillRandomWords(uint256,uint256[])": {
+					"params": {
+						"randomWords": "the VRF output expanded to the requested number of words",
+						"requestId": "The Id initially returned by requestRandomWords"
+					}
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"safeTransferFrom(address,address,uint256)": {
+					"details": "See {IERC721-safeTransferFrom}."
+				},
+				"safeTransferFrom(address,address,uint256,bytes)": {
+					"details": "See {IERC721-safeTransferFrom}."
+				},
+				"setApprovalForAll(address,bool)": {
+					"details": "See {IERC721-setApprovalForAll}."
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}"
+				},
+				"symbol()": {
+					"details": "See {IERC721Metadata-symbol}."
+				},
+				"tokenURI(uint256)": {
+					"details": "See {IERC721Metadata-tokenURI}."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "See {IERC721-transferFrom}."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"rawFulfillRandomWords(uint256,uint256[])": {
+					"notice": "rawFulfillRandomWords is called by VRFCoordinator when itreceives a valid VRF proof. rawFulfillRandomWords then callsfulfillRandomWords, after validating the origin of the call"
+				}
+			},
 			"version": 1
 		}
 	},
@@ -114,36 +899,52 @@
 		"remappings": []
 	},
 	"sources": {
-		"BigPicture.sol": {
-			"keccak256": "0x949e10023d8067a0394b2c4eab9a249235f9d5f528f8edbac61b3b2c0c21b2af",
+		"@bisonai/orakl-contracts/src/v0.1/VRFConsumerBase.sol": {
+			"keccak256": "0x8f25cf557237f53059663038b409a6a09210710ebc86bed6f416d418c02f6425",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://72726b4ffd6dbc91629f9bc80846e648328fc3b524f12f61e307a5c7041d8acf",
-				"dweb:/ipfs/QmTnSAyBBQUNyndZt5JMyeWXXcVSRHohrfx3diY7vBznJ4"
+				"bzz-raw://7d718c475fd80a6414309aa7cccfd03ee7ae46c4370fb57416bcfc42e4aa631b",
+				"dweb:/ipfs/QmZDNsVDNwu7LvQHAwGGjiEbYybmFPAz9Q3nGWhGVsvoQE"
+			]
+		},
+		"@bisonai/orakl-contracts/src/v0.1/interfaces/ICoordinatorBase.sol": {
+			"keccak256": "0xfe05fee3374629efcc792974be00bf20bcc87e3b5dd6ed9791461bcc5e6caf43",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8dcdb01ac978a2404d699f566a5cf624cc85c0cee5e2e917069786c9dd1d8ed4",
+				"dweb:/ipfs/QmcCYnuQ46LRPpNbKkAqLJpYZJrD3FSse93VFrDhY6Wotf"
+			]
+		},
+		"@bisonai/orakl-contracts/src/v0.1/interfaces/IVRFCoordinator.sol": {
+			"keccak256": "0x6b0474d5d4482ff306990782da936d88f2ed1d251f9105c2f3f988699a4d42f5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c7c7b853590d519af1e8f31198e4943e9c9e8e4c13b5b50f945efdac66365730",
+				"dweb:/ipfs/QmVKHJRCN2wuadFww2TnKro3GJR5FUsp9NDeZ3378PTeUQ"
+			]
+		},
+		"@bisonai/orakl-contracts/src/v0.1/interfaces/IVRFCoordinatorBase.sol": {
+			"keccak256": "0x0d8bd0618a35c5cb1424df6f2abbb19c820560a829f5c80997cd7b9e086cbbc1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://586d8f798d47d2b78f26960b57d2413010e33417e407cf261d6065f3d0e1cc00",
+				"dweb:/ipfs/QmSK4u7tii7fTAVT7hW4LMs4Z2pwNpUcXMZuNf9QsjyW3f"
+			]
+		},
+		"BigPicture.sol": {
+			"keccak256": "0xc0e8d5e7b8d235f7ab7dbed85ff8abbe590e79f9d5e078f9e5f3d0aaf0c285af",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://aa3e96b00d10cc7b9af2ec649244a165e9d2fbb84243ba2e4bc2e81a23564149",
+				"dweb:/ipfs/QmQzazvBcmEeW1JCcwSziXMBkciRE3geeqL6CVSkoZq4mx"
 			]
 		},
 		"BigPictureFactory.sol": {
-			"keccak256": "0xe34ba772f0073721a20e9dc2eb45faf0bb5d8f492efd3174bbcc5264788628ed",
+			"keccak256": "0xca4507956ba8146ee02eae9d5df9d48ef75929768d3dfd14cff1d1f42b623a0b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8da80c6b4927b9bf764bef75860d636d132ba076e260d4de78beb10c57b36754",
-				"dweb:/ipfs/QmepCVnNYVtUnYhASpL8KbZ8mgWM6RvxesGZ5qe725Ez2Q"
-			]
-		},
-		"Picture.sol": {
-			"keccak256": "0xdd2a48316a223d752facbae03ac785fc4f6ed10ed2c07e86c4e2ddf5af54fb5e",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://4b6033bd41caa124913572c56ce256d0591bcd6e5b815f372ca1a7f247d7a654",
-				"dweb:/ipfs/Qmf4DB3HJGpBAG243MKJDSkKxfGMbXNnhGTm27wqonZp2y"
-			]
-		},
-		"PictureToken.sol": {
-			"keccak256": "0x6f1874053cdb9ccc71d0a3ce45574d2aacdffa1df18cd832d1b265f44bb67020",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://304f98d44dc5bb5c5e061716fbc16f18c726ed661e2d8d152221a555af4c756b",
-				"dweb:/ipfs/QmWjU3cjAHeLq98wGF8g4dDNp9ByY2RU3f7K6za89U57q1"
+				"bzz-raw://83e82362044169c77407536e1aeaa988a8a9242a14997e46d43634cffbd8d50f",
+				"dweb:/ipfs/QmW3juLRybuiKsJDkV6DLexpHe3vsbqm4fYeuT8H3xq51n"
 			]
 		},
 		"openzeppelin-contracts/contracts/access/Ownable.sol": {
@@ -152,6 +953,30 @@
 			"urls": [
 				"bzz-raw://e6e32c81c8d84199eda0de40d33bb77c7acbb482e3f545d5cfba8195af0a88e0",
 				"dweb:/ipfs/Qmaf1WAinzjYWGNxRzCTmn2QABFWS912HwC8eiD7cyTgis"
+			]
+		},
+		"openzeppelin-contracts/contracts/interfaces/IERC165.sol": {
+			"keccak256": "0x4764a3cb550846ec714888e19407f05c8d3cf56181d4a090f451beb8064b1a41",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c0dfe15ab99b1ec4aec1d0c90dc077b27aab5a1a0d305c6c641698100fc27c64",
+				"dweb:/ipfs/QmWWsr2frKgKhNMJwdRXBe7vgRHCzSNTLyGMxbbc6Fuz81"
+			]
+		},
+		"openzeppelin-contracts/contracts/interfaces/IERC4906.sol": {
+			"keccak256": "0x7b29b3947e0a86bf596aa408b1395110a9a7fa31213dc928cf5ec927edff2585",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d59b31e9c356988b8eb7bf63a4ea264f583dd0a62b86a163632c40bbe3aa7050",
+				"dweb:/ipfs/QmZBiYy7icKr5Lucb8yxujYfg3AMHW2zLD7n4JFYNVSinV"
+			]
+		},
+		"openzeppelin-contracts/contracts/interfaces/IERC721.sol": {
+			"keccak256": "0xdac767d30fc5b3ab8cb3238a18a86a6738f02ec8fad07b1cd74493c7212d3141",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c5142e04f3b754c3c24795000e10d90dbd5565499f1b019de9e9f6a847a219a0",
+				"dweb:/ipfs/QmS7VJ4LxS4F4okSxSu93ELv6irVCGfQDPDH3ENUz2rGYF"
 			]
 		},
 		"openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol": {
@@ -184,6 +1009,14 @@
 			"urls": [
 				"bzz-raw://acb98725687905d9183432eeaa3f7dca110b258ea403fd07b01fcc32ddb16d04",
 				"dweb:/ipfs/QmaWdFfHxZdggD16Hu3CgJ3dSGvQzsmovZBW3rorYh6S5N"
+			]
+		},
+		"openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+			"keccak256": "0xea2ce2276d96ef81067a452a0c27f31bee2d3c47de47041fda9931c10e825523",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://29793c6d491ee3bf35f86ed717126830efc0309ac9d10f6c3059f4da0355fce7",
+				"dweb:/ipfs/QmUZV6nnQEXoiBDCgYSyPhSqLjAFJsrzghX5aqKWCrmxtH"
 			]
 		},
 		"openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol": {

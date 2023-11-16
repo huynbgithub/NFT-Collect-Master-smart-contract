@@ -34,12 +34,12 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         uint256 _rewardPrice,
         address _factoryAddress
     )
-    VRFConsumerBase(0x6B4c0b11bd7fE1E9e9a69297347cFDccA416dF5F) 
+    VRFConsumerBase(0xDA8c0A00A372503aa6EC80f9b29Cc97C454bE499) 
     ERC721("CollectMasterToken", "CMT")
     Ownable(msg.sender)
     {
-        COORDINATOR = IVRFCoordinator(0x6B4c0b11bd7fE1E9e9a69297347cFDccA416dF5F);
-        sAccountId = 197;
+        COORDINATOR = IVRFCoordinator(0xDA8c0A00A372503aa6EC80f9b29Cc97C454bE499);
+        sAccountId = 134;
         sKeyHash = 0xd9af33106d664a53cb9946df5cd81a30695f5b72224ee64e798b278af812779c;
         bigPictureName = _name;
         image= _image;

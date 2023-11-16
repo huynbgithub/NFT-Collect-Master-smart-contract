@@ -1,10 +1,56 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.22+commit.4fc1097e"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
 			{
 				"inputs": [
 					{
@@ -14,19 +60,6 @@
 					}
 				],
 				"name": "addBigPicture",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "contract PictureToken",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"name": "addPictureToken",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -53,25 +86,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "allPictureTokens",
-				"outputs": [
-					{
-						"internalType": "contract PictureToken",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "string",
 						"name": "_name",
 						"type": "string"
@@ -82,9 +96,9 @@
 						"type": "string"
 					},
 					{
-						"internalType": "contract Picture[]",
+						"internalType": "string[]",
 						"name": "_picturePart",
-						"type": "address[]"
+						"type": "string[]"
 					},
 					{
 						"internalType": "uint256",
@@ -112,40 +126,63 @@
 			},
 			{
 				"inputs": [],
-				"name": "getAllPictureTokens",
+				"name": "owner",
 				"outputs": [
 					{
-						"internalType": "contract PictureToken[]",
+						"internalType": "address",
 						"name": "",
-						"type": "address[]"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "yourAddress",
+						"name": "newOwner",
 						"type": "address"
 					}
 				],
-				"name": "getAllYourPictureTokens",
-				"outputs": [
-					{
-						"internalType": "contract PictureToken[]",
-						"name": "",
-						"type": "address[]"
-					}
-				],
-				"stateMutability": "view",
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
 		"devdoc": {
+			"errors": {
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				]
+			},
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -170,36 +207,52 @@
 		"remappings": []
 	},
 	"sources": {
-		"BigPicture.sol": {
-			"keccak256": "0x949e10023d8067a0394b2c4eab9a249235f9d5f528f8edbac61b3b2c0c21b2af",
+		"@bisonai/orakl-contracts/src/v0.1/VRFConsumerBase.sol": {
+			"keccak256": "0x8f25cf557237f53059663038b409a6a09210710ebc86bed6f416d418c02f6425",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://72726b4ffd6dbc91629f9bc80846e648328fc3b524f12f61e307a5c7041d8acf",
-				"dweb:/ipfs/QmTnSAyBBQUNyndZt5JMyeWXXcVSRHohrfx3diY7vBznJ4"
+				"bzz-raw://7d718c475fd80a6414309aa7cccfd03ee7ae46c4370fb57416bcfc42e4aa631b",
+				"dweb:/ipfs/QmZDNsVDNwu7LvQHAwGGjiEbYybmFPAz9Q3nGWhGVsvoQE"
+			]
+		},
+		"@bisonai/orakl-contracts/src/v0.1/interfaces/ICoordinatorBase.sol": {
+			"keccak256": "0xfe05fee3374629efcc792974be00bf20bcc87e3b5dd6ed9791461bcc5e6caf43",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8dcdb01ac978a2404d699f566a5cf624cc85c0cee5e2e917069786c9dd1d8ed4",
+				"dweb:/ipfs/QmcCYnuQ46LRPpNbKkAqLJpYZJrD3FSse93VFrDhY6Wotf"
+			]
+		},
+		"@bisonai/orakl-contracts/src/v0.1/interfaces/IVRFCoordinator.sol": {
+			"keccak256": "0x6b0474d5d4482ff306990782da936d88f2ed1d251f9105c2f3f988699a4d42f5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c7c7b853590d519af1e8f31198e4943e9c9e8e4c13b5b50f945efdac66365730",
+				"dweb:/ipfs/QmVKHJRCN2wuadFww2TnKro3GJR5FUsp9NDeZ3378PTeUQ"
+			]
+		},
+		"@bisonai/orakl-contracts/src/v0.1/interfaces/IVRFCoordinatorBase.sol": {
+			"keccak256": "0x0d8bd0618a35c5cb1424df6f2abbb19c820560a829f5c80997cd7b9e086cbbc1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://586d8f798d47d2b78f26960b57d2413010e33417e407cf261d6065f3d0e1cc00",
+				"dweb:/ipfs/QmSK4u7tii7fTAVT7hW4LMs4Z2pwNpUcXMZuNf9QsjyW3f"
+			]
+		},
+		"BigPicture.sol": {
+			"keccak256": "0x5b46aaac195be21aa426d37507eb081cb8114da55713ceedaf0782f49df773ce",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a22ebe36795900856719211ccfdf2732ba2543503ac0a862a2dde2487cd3116a",
+				"dweb:/ipfs/QmaMQg9w26JZXrHgMkqvPzJXV6G2BLPbH9RpdT5ewRQFLU"
 			]
 		},
 		"BigPictureFactory.sol": {
-			"keccak256": "0xe34ba772f0073721a20e9dc2eb45faf0bb5d8f492efd3174bbcc5264788628ed",
+			"keccak256": "0xca4507956ba8146ee02eae9d5df9d48ef75929768d3dfd14cff1d1f42b623a0b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8da80c6b4927b9bf764bef75860d636d132ba076e260d4de78beb10c57b36754",
-				"dweb:/ipfs/QmepCVnNYVtUnYhASpL8KbZ8mgWM6RvxesGZ5qe725Ez2Q"
-			]
-		},
-		"Picture.sol": {
-			"keccak256": "0xdd2a48316a223d752facbae03ac785fc4f6ed10ed2c07e86c4e2ddf5af54fb5e",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://4b6033bd41caa124913572c56ce256d0591bcd6e5b815f372ca1a7f247d7a654",
-				"dweb:/ipfs/Qmf4DB3HJGpBAG243MKJDSkKxfGMbXNnhGTm27wqonZp2y"
-			]
-		},
-		"PictureToken.sol": {
-			"keccak256": "0x6f1874053cdb9ccc71d0a3ce45574d2aacdffa1df18cd832d1b265f44bb67020",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://304f98d44dc5bb5c5e061716fbc16f18c726ed661e2d8d152221a555af4c756b",
-				"dweb:/ipfs/QmWjU3cjAHeLq98wGF8g4dDNp9ByY2RU3f7K6za89U57q1"
+				"bzz-raw://83e82362044169c77407536e1aeaa988a8a9242a14997e46d43634cffbd8d50f",
+				"dweb:/ipfs/QmW3juLRybuiKsJDkV6DLexpHe3vsbqm4fYeuT8H3xq51n"
 			]
 		},
 		"openzeppelin-contracts/contracts/access/Ownable.sol": {
@@ -208,6 +261,30 @@
 			"urls": [
 				"bzz-raw://e6e32c81c8d84199eda0de40d33bb77c7acbb482e3f545d5cfba8195af0a88e0",
 				"dweb:/ipfs/Qmaf1WAinzjYWGNxRzCTmn2QABFWS912HwC8eiD7cyTgis"
+			]
+		},
+		"openzeppelin-contracts/contracts/interfaces/IERC165.sol": {
+			"keccak256": "0x4764a3cb550846ec714888e19407f05c8d3cf56181d4a090f451beb8064b1a41",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c0dfe15ab99b1ec4aec1d0c90dc077b27aab5a1a0d305c6c641698100fc27c64",
+				"dweb:/ipfs/QmWWsr2frKgKhNMJwdRXBe7vgRHCzSNTLyGMxbbc6Fuz81"
+			]
+		},
+		"openzeppelin-contracts/contracts/interfaces/IERC4906.sol": {
+			"keccak256": "0x7b29b3947e0a86bf596aa408b1395110a9a7fa31213dc928cf5ec927edff2585",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d59b31e9c356988b8eb7bf63a4ea264f583dd0a62b86a163632c40bbe3aa7050",
+				"dweb:/ipfs/QmZBiYy7icKr5Lucb8yxujYfg3AMHW2zLD7n4JFYNVSinV"
+			]
+		},
+		"openzeppelin-contracts/contracts/interfaces/IERC721.sol": {
+			"keccak256": "0xdac767d30fc5b3ab8cb3238a18a86a6738f02ec8fad07b1cd74493c7212d3141",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c5142e04f3b754c3c24795000e10d90dbd5565499f1b019de9e9f6a847a219a0",
+				"dweb:/ipfs/QmS7VJ4LxS4F4okSxSu93ELv6irVCGfQDPDH3ENUz2rGYF"
 			]
 		},
 		"openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol": {
@@ -240,6 +317,14 @@
 			"urls": [
 				"bzz-raw://acb98725687905d9183432eeaa3f7dca110b258ea403fd07b01fcc32ddb16d04",
 				"dweb:/ipfs/QmaWdFfHxZdggD16Hu3CgJ3dSGvQzsmovZBW3rorYh6S5N"
+			]
+		},
+		"openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+			"keccak256": "0xea2ce2276d96ef81067a452a0c27f31bee2d3c47de47041fda9931c10e825523",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://29793c6d491ee3bf35f86ed717126830efc0309ac9d10f6c3059f4da0355fce7",
+				"dweb:/ipfs/QmUZV6nnQEXoiBDCgYSyPhSqLjAFJsrzghX5aqKWCrmxtH"
 			]
 		},
 		"openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
