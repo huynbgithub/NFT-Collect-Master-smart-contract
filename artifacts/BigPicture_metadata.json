@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.22+commit.4fc1097e"
+		"version": "0.8.20+commit.a1b79de6"
 	},
 	"language": "Solidity",
 	"output": {
@@ -893,7 +893,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -940,11 +940,11 @@
 			]
 		},
 		"BigPictureFactory.sol": {
-			"keccak256": "0xca4507956ba8146ee02eae9d5df9d48ef75929768d3dfd14cff1d1f42b623a0b",
+			"keccak256": "0x2b3fa50379e854c235bd0f3f5f09b0fb21e39981cbaf5bf7a5a17e77c196d4e4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://83e82362044169c77407536e1aeaa988a8a9242a14997e46d43634cffbd8d50f",
-				"dweb:/ipfs/QmW3juLRybuiKsJDkV6DLexpHe3vsbqm4fYeuT8H3xq51n"
+				"bzz-raw://2f687a86da3aeacc7646a580d40b8e86554e2ddf213cd25c3fe3c70ab8273ce7",
+				"dweb:/ipfs/QmTFgWAJkSoMoFpLCzufzJ1roSJnu8gSefwSwdC48zCBAz"
 			]
 		},
 		"openzeppelin-contracts/contracts/access/Ownable.sol": {

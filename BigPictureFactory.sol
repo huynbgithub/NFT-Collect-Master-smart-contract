@@ -49,14 +49,13 @@ contract BigPictureFactory is Ownable {
         string[] memory _picturePart,
         uint256 _rewardPrice
     ) public {
-        BigPicture newBigPicture = new BigPicture(
+        new BigPicture(
             _name,
             _image,
             _picturePart,
             _rewardPrice,
             address(this)
         );
-        addBigPicture(newBigPicture);
     }
 
 }

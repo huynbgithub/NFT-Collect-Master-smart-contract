@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.22+commit.4fc1097e"
+		"version": "0.8.20+commit.a1b79de6"
 	},
 	"language": "Solidity",
 	"output": {
@@ -201,7 +201,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -240,11 +240,11 @@
 			]
 		},
 		"BigPicture.sol": {
-			"keccak256": "0x5b46aaac195be21aa426d37507eb081cb8114da55713ceedaf0782f49df773ce",
+			"keccak256": "0xc0e8d5e7b8d235f7ab7dbed85ff8abbe590e79f9d5e078f9e5f3d0aaf0c285af",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a22ebe36795900856719211ccfdf2732ba2543503ac0a862a2dde2487cd3116a",
-				"dweb:/ipfs/QmaMQg9w26JZXrHgMkqvPzJXV6G2BLPbH9RpdT5ewRQFLU"
+				"bzz-raw://aa3e96b00d10cc7b9af2ec649244a165e9d2fbb84243ba2e4bc2e81a23564149",
+				"dweb:/ipfs/QmQzazvBcmEeW1JCcwSziXMBkciRE3geeqL6CVSkoZq4mx"
 			]
 		},
 		"BigPictureFactory.sol": {
