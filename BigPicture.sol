@@ -25,8 +25,6 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     uint256 rewardPrice;
     BigPictureFactory factory;
 
-    // PictureToken[] thisPictureAllTokens;
-
     constructor (
         string memory _name,
         string memory _image,
@@ -54,9 +52,16 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         return BigPictureData(bigPictureName, image, picturePieces, rewardPrice);
     }
 
-    // function getThisBigPictureAllTokens() public view returns (PictureToken[] memory) {
-    //     return thisPictureAllTokens;
-    // }
+    function getYourTokens(address owner) public view returns (TokenData[] memory) {
+        TokenData[] memory tokenList = new TokenData[](_nextTokenId + 1);
+
+        for (uint256 i = 0; i <= _nextTokenId; i++) {
+            if (ownerOf(i) == owner) {
+                tokenList[i] = TokenData(i, tokenURI(i));
+            }
+        }
+        return tokenList;
+    }
 
     function requestRandomWords() public returns (uint256 requestId) {
         requestId = COORDINATOR.requestRandomWords(
@@ -94,4 +99,9 @@ struct BigPictureData {
     string image;
     string[] picturePieces;
     uint256 rewardPrice;
+}
+
+struct TokenData {
+    uint256 id;
+    string image;
 }
