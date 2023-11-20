@@ -53,9 +53,9 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     }
 
     function getYourTokens(address owner) public view returns (TokenData[] memory) {
-        TokenData[] memory tokenList = new TokenData[](_nextTokenId + 1);
+        TokenData[] memory tokenList = new TokenData[](_nextTokenId);
 
-        for (uint256 i = 0; i <= _nextTokenId; i++) {
+        for (uint256 i = 0; i < _nextTokenId; i++) {
             if (ownerOf(i) == owner) {
                 tokenList[i] = TokenData(i, tokenURI(i));
             }
@@ -78,11 +78,14 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     ) internal override {
         randomIndex = randomWords[0] % picturePieces.length;
         uint256 tokenId = _nextTokenId++;
-        _mint(msg.sender, tokenId);
+        _mint(tempAddress, tokenId);
         _setTokenURI(tokenId, picturePieces[randomIndex]);
     }
 
+    address public tempAddress;
+
     function mintCMT () public {
+        tempAddress = msg.sender;
         requestRandomWords();
     }
 
