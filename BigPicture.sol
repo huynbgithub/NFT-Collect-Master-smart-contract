@@ -49,7 +49,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     }
 
     function getSingleBigPicture() public view returns (BigPictureData memory) {
-        return BigPictureData(bigPictureName, image, picturePieces, rewardPrice);
+        return BigPictureData(address(this), bigPictureName, image, picturePieces, rewardPrice);
     }
 
     function getYourTokens(address owner) public view returns (TokenData[] memory) {
@@ -98,6 +98,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
 }
 
 struct BigPictureData {
+    address bigPictureAddress;
     string name;
     string image;
     string[] picturePieces;

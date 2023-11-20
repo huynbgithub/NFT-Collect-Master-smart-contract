@@ -113,6 +113,46 @@
 			},
 			{
 				"inputs": [],
+				"name": "getAllBigPictureDatas",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "bigPictureAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "image",
+								"type": "string"
+							},
+							{
+								"internalType": "string[]",
+								"name": "picturePieces",
+								"type": "string[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "rewardPrice",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct BigPictureData[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "getAllBigPictures",
 				"outputs": [
 					{
@@ -240,19 +280,19 @@
 			]
 		},
 		"BigPicture.sol": {
-			"keccak256": "0x68c312f94e358c3ae408c544a641f9eb67b076b58dbd4a24bf4e5530fe439f49",
+			"keccak256": "0x49db370465e432fef9dd289aa3f57b893ed5f809636ba7313505fc56ad53ac17",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b9688047a1ac0ac0a875d9dbdac84139170be584ee8e93eb7a766b58009ca000",
-				"dweb:/ipfs/QmZ86sBJVyNg1ib8g5bCPxtiA9L65ugkMaYET2D2UqA2ah"
+				"bzz-raw://6c3f9cb53dd63e2ae99e86eed972bd1b4357db631d8ad7c7f3ddb99201e3a62f",
+				"dweb:/ipfs/QmQsazi8ft6PRCDT1fm8jZu2wVkygNYP2ayMeLVUMMqNsh"
 			]
 		},
 		"BigPictureFactory.sol": {
-			"keccak256": "0x2b3fa50379e854c235bd0f3f5f09b0fb21e39981cbaf5bf7a5a17e77c196d4e4",
+			"keccak256": "0xc3c95547e1c26d38fdc0463ca7cff8d7a63e5bca4e264bd4644a163e205c5566",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2f687a86da3aeacc7646a580d40b8e86554e2ddf213cd25c3fe3c70ab8273ce7",
-				"dweb:/ipfs/QmTFgWAJkSoMoFpLCzufzJ1roSJnu8gSefwSwdC48zCBAz"
+				"bzz-raw://cc69e819117f54294a66e17c415c14a84e7af42acbd9f7a813e112752b8ac3b7",
+				"dweb:/ipfs/QmNN42QnQtLqdKrZB7QVJRtiJtb8K6vnu5UiViZzWvSj6E"
 			]
 		},
 		"openzeppelin-contracts/contracts/access/Ownable.sol": {

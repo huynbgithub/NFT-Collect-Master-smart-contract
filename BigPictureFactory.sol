@@ -9,35 +9,25 @@ contract BigPictureFactory is Ownable {
     constructor() Ownable(msg.sender) {}
 
     BigPicture[] public allBigPictures;
-    // PictureToken[] public allPictureTokens;
 
     function getAllBigPictures() public view returns (BigPicture[] memory) {
         return allBigPictures;
     }
 
-    // function getAllPictureTokens() public view returns (PictureToken[] memory) {
-    //     return allPictureTokens;
-    // }
+    function getAllBigPictureDatas()
+        external
+        view
+        returns (BigPictureData[] memory)
+    {
+        BigPictureData[] memory bigPictureDatas = new BigPictureData[](
+            allBigPictures.length
+        );
 
-    // function getAllYourPictureTokens(address yourAddress) public view returns (PictureToken[] memory) {
-    //     PictureToken[] memory allYourPictureTokens = new PictureToken[](
-    //         allPictureTokens.length
-    //     );
-    //     uint32 allYourPictureTokensCount = 0;
-
-    //     for (uint32 i = 0; i < allPictureTokens.length; i++) {
-    //         if (allPictureTokens[i].owner() == yourAddress) {
-    //             allYourPictureTokens[allYourPictureTokensCount] = allPictureTokens[i];
-    //             allYourPictureTokensCount++;
-    //         }
-    //     }
-
-    //     return allYourPictureTokens;
-    // }
-
-    // function addPictureToken(PictureToken token) public {
-    //     allPictureTokens.push(token);
-    // }
+        for (uint i = 0; i < allBigPictures.length; i++) {
+            bigPictureDatas[i] = allBigPictures[i].getSingleBigPicture();
+        }
+        return bigPictureDatas;
+    }
 
     function addBigPicture(BigPicture bigPicture) public {
         allBigPictures.push(bigPicture);
