@@ -37,13 +37,15 @@ contract BigPictureFactory is Ownable {
         string memory _name,
         string memory _image,
         string[] memory _picturePart,
-        uint256 _rewardPrice
+        uint256 _rewardPrice,
+        uint256 _mintPrice
     ) public {
         new BigPicture(
             _name,
             _image,
             _picturePart,
             _rewardPrice,
+            _mintPrice,
             address(this)
         );
     }

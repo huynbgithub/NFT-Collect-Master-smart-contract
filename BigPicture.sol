@@ -10,26 +10,34 @@ import {IVRFCoordinator} from "@bisonai/orakl-contracts/src/v0.1/interfaces/IVRF
 
 contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
 
+    event ReceiveCalled(uint amount);
+
+    receive() external payable {
+        emit ReceiveCalled(msg.value);
+    }
+
     IVRFCoordinator COORDINATOR;
     uint64 public sAccountId;
     bytes32 public sKeyHash;
-    uint32 sCallbackGasLimit = 300000;
-    uint32 sNumWords = 1;
+    uint32 public sCallbackGasLimit = 300000;
+    uint32 public sNumWords = 1;
     uint public randomIndex;
 
     uint256 private _nextTokenId;
 
-    string bigPictureName;
-    string image;
-    string[] picturePieces;
-    uint256 rewardPrice;
-    BigPictureFactory factory;
+    string public bigPictureName;
+    string public image;
+    string[] public picturePieces;
+    uint256 public rewardPrice;
+    uint256 public mintPrice;
+    BigPictureFactory public factory;
 
     constructor (
         string memory _name,
         string memory _image,
         string[] memory _picturePieces,
         uint256 _rewardPrice,
+        uint256 _mintPrice,
         address _factoryAddress
     )
     VRFConsumerBase(0xDA8c0A00A372503aa6EC80f9b29Cc97C454bE499) 
@@ -43,13 +51,14 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         image= _image;
         picturePieces = _picturePieces;
         rewardPrice = _rewardPrice;
+        mintPrice = _mintPrice;
         factory = BigPictureFactory(_factoryAddress);
         factory.addBigPicture(this);
         randomIndex = 0;
     }
 
     function getSingleBigPicture() public view returns (BigPictureData memory) {
-        return BigPictureData(address(this), bigPictureName, image, picturePieces, rewardPrice);
+        return BigPictureData(address(this), bigPictureName, image, picturePieces, rewardPrice, mintPrice);
     }
 
     function getYourTokens(address owner) public view returns (TokenData[] memory) {
@@ -84,8 +93,10 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
 
     address public tempAddress;
 
-    function mintCMT () public {
+    function mintCMT () public payable {
+        require(msg.value == mintPrice, "Amount must equal mint price!");
         tempAddress = msg.sender;
+        payable(address(this)).transfer(msg.value);
         requestRandomWords();
     }
 
@@ -103,6 +114,7 @@ struct BigPictureData {
     string image;
     string[] picturePieces;
     uint256 rewardPrice;
+    uint256 mintPrice;
 }
 
 struct TokenData {
