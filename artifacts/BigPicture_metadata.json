@@ -706,7 +706,7 @@
 				],
 				"name": "purchaseToken",
 				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -1256,11 +1256,11 @@
 			]
 		},
 		"BigPicture.sol": {
-			"keccak256": "0xe478675c47cd0148afc105f70917ec13cfda5cc44638f182b672b6afc24471fd",
+			"keccak256": "0xabfc8e8860429f0c9bb572f01648222bb32b490b7d7365b34d14f9be6ee29a93",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d48a62933636168b734aa1864de5067119082077d6aa9a6f019afa3c10bd2545",
-				"dweb:/ipfs/Qmbsk2ioBWeFVNBjSYoUWwYHy7VDsd7QxK3HxKztHo2wj6"
+				"bzz-raw://3c4cd66f198e9f8bae37dece9cea79f422a86a177bb1fda5153e8c09024d6ffc",
+				"dweb:/ipfs/QmfCGhocbNSdmVbWCDzTgB2maJqpUvSUusb44BKuwaamaT"
 			]
 		},
 		"BigPictureFactory.sol": {

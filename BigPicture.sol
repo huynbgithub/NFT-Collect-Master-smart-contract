@@ -66,11 +66,19 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     function getYourTokens(address owner) public view returns (TokenData[] memory) {
         TokenData[] memory tokenList = new TokenData[](_nextTokenId);
 
+        uint256 tokenCount = 0;
+
         for (uint256 i = 0; i < _nextTokenId; i++) {
             if (ownerOf(i) == owner) {
-                tokenList[i] = TokenData(i, tokenURI(i), onSale[i], tokenPrice[i]);
+                tokenList[tokenCount] = TokenData(i, tokenURI(i), onSale[i], tokenPrice[i]);
+                tokenCount++;
             }
         }
+
+        assembly {
+            mstore(tokenList, tokenCount)
+        }
+
         return tokenList;
     }
 
@@ -105,7 +113,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
 
     function mintCMTDemo() public payable {
         tempAddress = msg.sender;
-        payable(address(this)).transfer(mintPrice * 9);
+        payable(address(this)).transfer(mintPrice);
         for (uint256 i = 0; i < picturePieces.length; i++) {
             uint256 tokenId = _nextTokenId++;
             _mint(tempAddress, tokenId);
@@ -131,13 +139,19 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
                 tokenCount++;
             }
         }
+
+        assembly {
+            mstore(tokenList, tokenCount)
+        }
+
         return tokenList;
     }
 
-    function purchaseToken(uint256 tokenId) public {
+    function purchaseToken(uint256 tokenId) public payable {
         payable(msg.sender).transfer(tokenPrice[tokenId]);
         payable(ownerOf(tokenId)).transfer(tokenPrice[tokenId]);
         transferFrom(msg.sender, ownerOf(tokenId), tokenId);
+        onSale[tokenId] = false;
     }
 
     SubmittedInfo[] public submitList;

@@ -251,7 +251,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -290,11 +290,11 @@
 			]
 		},
 		"BigPicture.sol": {
-			"keccak256": "0xd57a8587010849bc2e7477d94293ef68d832cb414b47baff29db091b1ec54f3b",
+			"keccak256": "0xe478675c47cd0148afc105f70917ec13cfda5cc44638f182b672b6afc24471fd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://48e44605ff3ed56fca06c0a8109979f744527ea5715aba67faa1ccbd5a729165",
-				"dweb:/ipfs/QmcbRGjh1g3w3hQgVUvH8haZEGZCiCMn2LyGMurpbPeBGY"
+				"bzz-raw://d48a62933636168b734aa1864de5067119082077d6aa9a6f019afa3c10bd2545",
+				"dweb:/ipfs/Qmbsk2ioBWeFVNBjSYoUWwYHy7VDsd7QxK3HxKztHo2wj6"
 			]
 		},
 		"BigPictureFactory.sol": {
