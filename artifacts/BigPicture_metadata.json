@@ -28,6 +28,11 @@
 						"type": "uint256"
 					},
 					{
+						"internalType": "uint256",
+						"name": "_mintPrice",
+						"type": "uint256"
+					},
+					{
 						"internalType": "address",
 						"name": "_factoryAddress",
 						"type": "address"
@@ -304,6 +309,19 @@
 				"type": "event"
 			},
 			{
+				"inputs": [],
+				"name": "_nextTokenId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -335,6 +353,32 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "bigPictureName",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "factory",
+				"outputs": [
+					{
+						"internalType": "contract BigPictureFactory",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -389,11 +433,76 @@
 								"internalType": "uint256",
 								"name": "rewardPrice",
 								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "mintPrice",
+								"type": "uint256"
 							}
 						],
 						"internalType": "struct BigPictureData",
 						"name": "",
 						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getSubmittedList",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "address[]",
+								"name": "tokenList",
+								"type": "address[]"
+							}
+						],
+						"internalType": "struct SubmittedInfo[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTokensOnSale",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "image",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "onSale",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenPrice",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct TokenData[]",
+						"name": "",
+						"type": "tuple[]"
 					}
 				],
 				"stateMutability": "view",
@@ -420,11 +529,34 @@
 								"internalType": "string",
 								"name": "image",
 								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "onSale",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenPrice",
+								"type": "uint256"
 							}
 						],
 						"internalType": "struct TokenData[]",
 						"name": "",
 						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "image",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -458,7 +590,27 @@
 				"inputs": [],
 				"name": "mintCMT",
 				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "mintCMTDemo",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "mintPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -469,6 +621,25 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "onSale",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -504,6 +675,56 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "picturePieces",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "purchaseToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"name": "putTokenOnSale",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -559,25 +780,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "sAccountId",
+				"name": "rewardPrice",
 				"outputs": [
 					{
-						"internalType": "uint64",
+						"internalType": "uint256",
 						"name": "",
-						"type": "uint64"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "sKeyHash",
-				"outputs": [
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -655,6 +863,50 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "submitList",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "address[]",
+								"name": "tokenList",
+								"type": "address[]"
+							}
+						],
+						"internalType": "struct SubmittedInfo",
+						"name": "submittedItem",
+						"type": "tuple"
+					}
+				],
+				"name": "submitTokens",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes4",
 						"name": "interfaceId",
 						"type": "bytes4"
@@ -692,6 +944,25 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -764,6 +1035,10 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
 			}
 		],
 		"devdoc": {
@@ -942,7 +1217,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -981,19 +1256,19 @@
 			]
 		},
 		"BigPicture.sol": {
-			"keccak256": "0x84d0b16e014b08fce22e20cca63f5c1b8cad777621c0e77b56116a600b3c3c5d",
+			"keccak256": "0xe478675c47cd0148afc105f70917ec13cfda5cc44638f182b672b6afc24471fd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e2e305958508b14ae0297264209772a588ec878af8f52f326028c26799158c67",
-				"dweb:/ipfs/QmTE7xnQX7RATTEBcaUswsh6HBXq4Aqc5kAuecVLVKvoyy"
+				"bzz-raw://d48a62933636168b734aa1864de5067119082077d6aa9a6f019afa3c10bd2545",
+				"dweb:/ipfs/Qmbsk2ioBWeFVNBjSYoUWwYHy7VDsd7QxK3HxKztHo2wj6"
 			]
 		},
 		"BigPictureFactory.sol": {
-			"keccak256": "0xc3c95547e1c26d38fdc0463ca7cff8d7a63e5bca4e264bd4644a163e205c5566",
+			"keccak256": "0x4762571c00eef5cb8b7e72ea9b253aa1f3637d10886bf347f306b19d8a6f0588",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://cc69e819117f54294a66e17c415c14a84e7af42acbd9f7a813e112752b8ac3b7",
-				"dweb:/ipfs/QmNN42QnQtLqdKrZB7QVJRtiJtb8K6vnu5UiViZzWvSj6E"
+				"bzz-raw://d1801d9804686024be28c7f5b420664262211e501ae545f9e6055c61e62be1c3",
+				"dweb:/ipfs/QmYSQY3iPdnHcPSzpm7y5Ym1D9HYLnrLy2H4B3c6AdBnAH"
 			]
 		},
 		"openzeppelin-contracts/contracts/access/Ownable.sol": {
