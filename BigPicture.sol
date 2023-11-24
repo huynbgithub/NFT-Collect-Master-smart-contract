@@ -3,17 +3,17 @@ pragma solidity ^0.8.20;
 
 import "./BigPictureFactory.sol";
 
-import "openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import "@bisonai/orakl-contracts/src/v0.1/VRFConsumerBase.sol";
 import {IVRFCoordinator} from "@bisonai/orakl-contracts/src/v0.1/interfaces/IVRFCoordinator.sol";
 
 contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
 
-    // event ReceiveCalled(uint amount);
+    event ReceiveCalled(uint256 amount);
 
     receive() external payable {
-        // emit ReceiveCalled(msg.value);
+        emit ReceiveCalled(msg.value);
     }
 
     IVRFCoordinator COORDINATOR;
@@ -24,8 +24,8 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     uint public randomIndex;
 
     uint256 public _nextTokenId;
-    mapping (uint256 => bool) public onSale;
-    mapping (uint256 => uint256) public tokenPrice;
+    mapping (uint256 tokenId => bool) public onSale;
+    mapping (uint256 tokenId => uint256) public tokenPrice;
 
     string public bigPictureName;
     string public image;
@@ -106,14 +106,18 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     address public tempAddress;
 
     function mintCMT () public payable {
+        require(msg.sender.balance >= mintPrice, "Balance is not enough!");
+        require(msg.value == mintPrice, "Value must be equal Mint Price!");
         tempAddress = msg.sender;
-        payable(address(this)).transfer(mintPrice);
+        payable(address(this)).transfer(msg.value);
         requestRandomWords();
     }
 
     function mintCMTDemo() public payable {
+        require(msg.sender.balance > mintPrice, "Balance is not enough!");
+        require(msg.value == mintPrice, "Value must equal to Mint Price!");
         tempAddress = msg.sender;
-        payable(address(this)).transfer(mintPrice);
+        payable(address(this)).transfer(msg.value);
         for (uint256 i = 0; i < picturePieces.length; i++) {
             uint256 tokenId = _nextTokenId++;
             _mint(tempAddress, tokenId);
@@ -123,18 +127,26 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         }
     }
 
-    function putTokenOnSale(uint256 id, uint256 price) public {
-        onSale[id] = true;
-        tokenPrice[id] = price;
+    function putTokenOnSale(uint256 tokenId, uint256 price) public {
+        require(msg.sender == ownerOf(tokenId), "You must be the token's owner!");
+        onSale[tokenId] = true;
+        tokenPrice[tokenId] = price;
+        approve(address(this), tokenId);
     }
 
-    function getTokensOnSale () public view returns (TokenData[] memory) {
+    function unSell(uint256 tokenId) public {
+        require(msg.sender == ownerOf(tokenId), "You must be the token's owner!");
+        onSale[tokenId] = false;
+        tokenPrice[tokenId] = 0;
+    }
+
+    function getTokensOnSale (address viewer) public view returns (TokenData[] memory) {
         TokenData[] memory tokenList = new TokenData[](_nextTokenId);
 
         uint256 tokenCount = 0;
 
         for (uint256 i = 0; i < _nextTokenId; i++) {
-            if (onSale[i] == true && ownerOf(i) != msg.sender) {
+            if (onSale[i] == true && ownerOf(i) != viewer) {
                 tokenList[tokenCount] = TokenData(i, tokenURI(i), onSale[i], tokenPrice[i]);
                 tokenCount++;
             }
@@ -148,9 +160,15 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     }
 
     function purchaseToken(uint256 tokenId) public payable {
-        payable(ownerOf(tokenId)).transfer(tokenPrice[tokenId]);
-        transferFrom(msg.sender, ownerOf(tokenId), tokenId);
+        require(msg.sender.balance > tokenPrice[tokenId], "Balance is not enough!");
+        require(msg.value == tokenPrice[tokenId], "Value must equal to Selling Price!");
+
+        address previousOwner = ownerOf(tokenId);
+
+        payable(previousOwner).transfer(msg.value);
+        this.transferFrom(previousOwner, msg.sender, tokenId);
         onSale[tokenId] = false;
+        tokenPrice[tokenId] = 0;
     }
 
     SubmittedInfo[] public submitList;
@@ -163,12 +181,10 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         return submitList;
     }
 
-
-    //Reward Winner
     function tranferRewardToWinner(address winnerAddress) public {
             payable(winnerAddress).transfer(rewardPrice);
     }
- 
+
 }
 
 struct BigPictureData {

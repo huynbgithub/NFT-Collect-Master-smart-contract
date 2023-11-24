@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import "./BigPicture.sol";
 
 contract BigPictureFactory is Ownable {
@@ -14,10 +14,7 @@ contract BigPictureFactory is Ownable {
         return allBigPictures;
     }
 
-    function getAllBigPictureDatas()
-        external
-        view
-        returns (BigPictureData[] memory)
+    function getAllBigPictureDatas() external view returns (BigPictureData[] memory)
     {
         BigPictureData[] memory bigPictureDatas = new BigPictureData[](
             allBigPictures.length
