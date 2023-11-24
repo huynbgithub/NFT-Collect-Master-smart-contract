@@ -148,7 +148,6 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     }
 
     function purchaseToken(uint256 tokenId) public payable {
-        payable(msg.sender).transfer(tokenPrice[tokenId]);
         payable(ownerOf(tokenId)).transfer(tokenPrice[tokenId]);
         transferFrom(msg.sender, ownerOf(tokenId), tokenId);
         onSale[tokenId] = false;
