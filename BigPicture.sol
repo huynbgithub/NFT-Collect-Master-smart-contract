@@ -10,10 +10,7 @@ import {IVRFCoordinator} from "@bisonai/orakl-contracts/src/v0.1/interfaces/IVRF
 
 contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
 
-    event ReceiveCalled(uint256 amount);
-
     receive() external payable {
-        emit ReceiveCalled(msg.value);
     }
 
     IVRFCoordinator COORDINATOR;
@@ -26,6 +23,9 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     uint256 public _nextTokenId;
     mapping (uint256 tokenId => bool) public onSale;
     mapping (uint256 tokenId => uint256) public tokenPrice;
+
+    bool public onGoing;
+    address public winner;
 
     string public bigPictureName;
     string public image;
@@ -45,7 +45,10 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     VRFConsumerBase(0xDA8c0A00A372503aa6EC80f9b29Cc97C454bE499) 
     ERC721("CollectMasterToken", "CMT")
     Ownable(msg.sender)
+    payable
     {
+        require(msg.value == _rewardPrice, "Value must equal to requard price!");
+
         COORDINATOR = IVRFCoordinator(0xDA8c0A00A372503aa6EC80f9b29Cc97C454bE499);
         sAccountId = 134;
         sKeyHash = 0xd9af33106d664a53cb9946df5cd81a30695f5b72224ee64e798b278af812779c;
@@ -57,6 +60,9 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         factory = BigPictureFactory(_factoryAddress);
         factory.addBigPicture(this);
         randomIndex = 0;
+        onGoing = true;
+
+        payable(address(this)).transfer(msg.value);
     }
 
     function getSingleBigPicture() public view returns (BigPictureData memory) {
@@ -109,7 +115,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         require(msg.sender.balance >= mintPrice, "Balance is not enough!");
         require(msg.value == mintPrice, "Value must be equal Mint Price!");
         tempAddress = msg.sender;
-        payable(address(this)).transfer(msg.value);
+        payable(owner()).transfer(msg.value);
         requestRandomWords();
     }
 
@@ -117,7 +123,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         require(msg.sender.balance > mintPrice, "Balance is not enough!");
         require(msg.value == mintPrice, "Value must equal to Mint Price!");
         tempAddress = msg.sender;
-        payable(address(this)).transfer(msg.value);
+        payable(owner()).transfer(msg.value);
         for (uint256 i = 0; i < picturePieces.length; i++) {
             uint256 tokenId = _nextTokenId++;
             _mint(tempAddress, tokenId);
@@ -171,18 +177,35 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         tokenPrice[tokenId] = 0;
     }
 
-    SubmittedInfo[] public submitList;
-
-    function submitTokens (SubmittedInfo memory submittedItem) public {
-        submitList.push(submittedItem);
+    function endGame(address winnerAddress) public payable {
+        payable(winnerAddress).transfer(rewardPrice);
+        onGoing = false;
     }
 
-    function getSubmittedList() public view returns (SubmittedInfo[] memory){
-        return submitList;
+    function claimReward() public payable winningCondition(msg.sender) {
+        this.endGame(msg.sender);
+        winner = msg.sender;
     }
 
-    function tranferRewardToWinner(address winnerAddress) public {
-            payable(winnerAddress).transfer(rewardPrice);
+    modifier winningCondition(address claimer) {
+        TokenData[] memory tokenList = getYourTokens(claimer);
+
+        bool[] memory isExisting = new bool[](picturePieces.length);
+
+        for (uint256 piece = 0; piece < picturePieces.length; piece++) {
+            for (uint256 i = 0; i < tokenList.length; i++) {
+                if (keccak256(bytes(tokenList[i].image)) == keccak256(bytes(picturePieces[piece]))) {
+                    isExisting[piece] = true;
+                }
+            }
+        }
+
+        for (uint256 piece = 0; piece < picturePieces.length; piece++) {
+                if (isExisting[piece] == false) {
+                    revert("Incomplete Collection!");
+                }
+        }
+        _;
     }
 
 }
@@ -201,9 +224,4 @@ struct TokenData {
     string image;
     bool onSale;
     uint256 tokenPrice;
-}
-
-struct SubmittedInfo {
-    address owner;
-    address[] tokenList;
 }

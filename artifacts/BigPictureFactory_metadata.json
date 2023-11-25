@@ -113,7 +113,7 @@
 				],
 				"name": "createBigPicture",
 				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -418,19 +418,19 @@
 			]
 		},
 		"BigPicture.sol": {
-			"keccak256": "0xb51ee65b5acde99e0e8405e04aed2d2ea7d54ef86d329bf705d9d820c78e47ce",
+			"keccak256": "0x0f43bae8b06d8aa07146484ed14382fe190289b8515a4ae747ad92d473deee9c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3ecb9ac8e57b8a0c42154518cafcb3cdc5f1e1c6c712924314180976a14a136c",
-				"dweb:/ipfs/QmUkYRv7YE1ptt6JGaxdwkY8jU6qeZnbsPFKFUL35SYSXV"
+				"bzz-raw://013db4aa91165498372740ddd580a801e02016325368c86aa43ea8211c905067",
+				"dweb:/ipfs/QmWBMcvLFSVKGMHLCSKmNQMhdaSQdGMxpEj5fM4Hfa7NLU"
 			]
 		},
 		"BigPictureFactory.sol": {
-			"keccak256": "0x54dad972ca8eade67ff287cc3f5c1a126197c70582da201348e08177298ee6c6",
+			"keccak256": "0x3ae634984e7aa73cabb6b7a4b0082e26e88f9b97d824c8aed9f2bce96a7604ec",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ed6a7147bfb24b1885166a3e72904a0377635584f74ef9cc381ff59ccdda11b3",
-				"dweb:/ipfs/Qmddawahcac4xyUtwTMSkxPgA1joKu9PhpGuiK8yN6chs6"
+				"bzz-raw://e2f42291d78cdea364bccdbe87d49ccaaa45801e1f3b714124a23d7c1013b8e2",
+				"dweb:/ipfs/QmQ1ifGkcoAV5VdY1JskWqvJpnPNPfRWmSfpAxrp5UxfUg"
 			]
 		}
 	},

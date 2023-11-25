@@ -287,19 +287,6 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "ReceiveCalled",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "from",
@@ -386,6 +373,13 @@
 			},
 			{
 				"inputs": [],
+				"name": "claimReward",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "factory",
 				"outputs": [
 					{
@@ -456,31 +450,6 @@
 						"internalType": "struct BigPictureData",
 						"name": "",
 						"type": "tuple"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getSubmittedList",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "address",
-								"name": "owner",
-								"type": "address"
-							},
-							{
-								"internalType": "address[]",
-								"name": "tokenList",
-								"type": "address[]"
-							}
-						],
-						"internalType": "struct SubmittedInfo[]",
-						"name": "",
-						"type": "tuple[]"
 					}
 				],
 				"stateMutability": "view",
@@ -882,50 +851,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "submitList",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"components": [
-							{
-								"internalType": "address",
-								"name": "owner",
-								"type": "address"
-							},
-							{
-								"internalType": "address[]",
-								"name": "tokenList",
-								"type": "address[]"
-							}
-						],
-						"internalType": "struct SubmittedInfo",
-						"name": "submittedItem",
-						"type": "tuple"
-					}
-				],
-				"name": "submitTokens",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "bytes4",
 						"name": "interfaceId",
 						"type": "bytes4"
@@ -1004,19 +929,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "winnerAddress",
-						"type": "address"
-					}
-				],
-				"name": "tranferRewardToWinner",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -1249,7 +1161,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -1416,11 +1328,11 @@
 			]
 		},
 		"BigPicture.sol": {
-			"keccak256": "0x1b9d27b12c4fdf96eff1b990b8f3ada923acddbd302a9339cf0ef71f57b1b1ae",
+			"keccak256": "0xceb4b7139f612cc8c76836ad566c8d00c48120a8ac341a481f1deecf4806b56e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://92124827a2a24f1601969a9a29ac54eff753a7b26a47d9cb49ac575c0e9342d1",
-				"dweb:/ipfs/QmTKXfExGRKvdRmXQcGoZTN4CMzvrJdXqfdbDMvTyZczN1"
+				"bzz-raw://ff0d9797f1293f5b7e63ca587cb527fa6cfb013dcbbf429733920bef42cdf031",
+				"dweb:/ipfs/Qmd1Yq1Agt21UXTSqhT5EVHMqq1nbwcRcJbcJpahfiqLSr"
 			]
 		},
 		"BigPictureFactory.sol": {
