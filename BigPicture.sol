@@ -47,8 +47,6 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
     Ownable(msg.sender)
     payable
     {
-        require(msg.value == _rewardPrice, "Value must equal to requard price!");
-
         COORDINATOR = IVRFCoordinator(0xDA8c0A00A372503aa6EC80f9b29Cc97C454bE499);
         sAccountId = 134;
         sKeyHash = 0xd9af33106d664a53cb9946df5cd81a30695f5b72224ee64e798b278af812779c;
@@ -61,8 +59,10 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         factory.addBigPicture(this);
         randomIndex = 0;
         onGoing = true;
+    }
 
-        payable(address(this)).transfer(msg.value);
+    function getOnGoingState() public view returns (bool) {
+        return onGoing;
     }
 
     function getSingleBigPicture() public view returns (BigPictureData memory) {
@@ -177,12 +177,12 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         tokenPrice[tokenId] = 0;
     }
 
-    function endGame(address winnerAddress) public payable {
+    function endGame(address winnerAddress) public {
         payable(winnerAddress).transfer(rewardPrice);
         onGoing = false;
     }
 
-    function claimReward() public payable winningCondition(msg.sender) {
+    function claimReward() public winningCondition(msg.sender) {
         this.endGame(msg.sender);
         winner = msg.sender;
     }

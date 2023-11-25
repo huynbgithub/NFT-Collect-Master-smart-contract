@@ -38,7 +38,7 @@
 						"type": "address"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "constructor"
 			},
 			{
@@ -379,6 +379,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "winnerAddress",
+						"type": "address"
+					}
+				],
+				"name": "endGame",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "factory",
 				"outputs": [
@@ -405,6 +418,19 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getOnGoingState",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -609,6 +635,19 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "onGoing",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -981,6 +1020,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "winner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"stateMutability": "payable",
 				"type": "receive"
 			}
@@ -1161,7 +1213,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -1328,19 +1380,19 @@
 			]
 		},
 		"BigPicture.sol": {
-			"keccak256": "0xceb4b7139f612cc8c76836ad566c8d00c48120a8ac341a481f1deecf4806b56e",
+			"keccak256": "0x348807653aa76ed34be3674d51268d36237b0da80b3358dfc5c87d1f30013137",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ff0d9797f1293f5b7e63ca587cb527fa6cfb013dcbbf429733920bef42cdf031",
-				"dweb:/ipfs/Qmd1Yq1Agt21UXTSqhT5EVHMqq1nbwcRcJbcJpahfiqLSr"
+				"bzz-raw://96d3981a7bf5f1d0980f75fe43a17e6df3bd32c08a9d61c725fddc26f1d97706",
+				"dweb:/ipfs/QmPbNg4uVW4QPHHepk71DjYV1oSaHxiihm4d77z8E3tQ1S"
 			]
 		},
 		"BigPictureFactory.sol": {
-			"keccak256": "0x54dad972ca8eade67ff287cc3f5c1a126197c70582da201348e08177298ee6c6",
+			"keccak256": "0x3125c79e21316966eb06fbae7c6d559e3f4a8425002c58cb5f27881fa0cb228e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ed6a7147bfb24b1885166a3e72904a0377635584f74ef9cc381ff59ccdda11b3",
-				"dweb:/ipfs/Qmddawahcac4xyUtwTMSkxPgA1joKu9PhpGuiK8yN6chs6"
+				"bzz-raw://69a0c7f4ef3201f1ed7f3d923625a326beacfef4bbe7b0c957c42bee8ca7dd90",
+				"dweb:/ipfs/QmQPPWXAjoSZKe3rYg12r6sCJnoZDvuDoFhgJyD8R8rF68"
 			]
 		}
 	},

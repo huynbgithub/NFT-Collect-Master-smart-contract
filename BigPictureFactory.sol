@@ -37,7 +37,9 @@ contract BigPictureFactory is Ownable {
         uint256 _rewardPrice,
         uint256 _mintPrice
     ) public payable {
-        new BigPicture(
+        require(msg.value == _rewardPrice,"Value must equal to Reward Price!");
+
+        BigPicture newBigPicture = new BigPicture(
             _name,
             _image,
             _picturePart,
@@ -45,6 +47,9 @@ contract BigPictureFactory is Ownable {
             _mintPrice,
             address(this)
         );
+
+        newBigPicture.transferOwnership(msg.sender);
+        payable(newBigPicture).transfer(msg.value);
     }
 
 }
