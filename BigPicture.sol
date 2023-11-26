@@ -125,7 +125,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
 
     address public tempAddress;
 
-    function mintCMT () isOnGoing public payable {
+    function mintCMT () isOnGoing notOwner public payable {
         require(msg.sender.balance >= mintPrice, "Balance is not enough!");
         require(msg.value == mintPrice, "Value must be equal Mint Price!");
         tempAddress = msg.sender;
@@ -133,7 +133,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         requestRandomWords();
     }
 
-    function mintCMTDemo() isOnGoing public payable {
+    function mintCMTDemo() isOnGoing notOwner public payable {
         require(msg.sender.balance > mintPrice, "Balance is not enough!");
         require(msg.value == mintPrice, "Value must equal to Mint Price!");
         tempAddress = msg.sender;
