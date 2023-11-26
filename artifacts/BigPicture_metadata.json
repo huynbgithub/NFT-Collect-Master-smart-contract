@@ -1380,11 +1380,11 @@
 			]
 		},
 		"BigPicture.sol": {
-			"keccak256": "0x348807653aa76ed34be3674d51268d36237b0da80b3358dfc5c87d1f30013137",
+			"keccak256": "0x79d9876e31b055c8520be744c89eb4c628658f56df85a983b4ec5b4eaeda0449",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://96d3981a7bf5f1d0980f75fe43a17e6df3bd32c08a9d61c725fddc26f1d97706",
-				"dweb:/ipfs/QmPbNg4uVW4QPHHepk71DjYV1oSaHxiihm4d77z8E3tQ1S"
+				"bzz-raw://a7d8433bde88718873fd785ba3e87ff775792a907bde2bb215c2ecd755476c30",
+				"dweb:/ipfs/QmYghwCGBLzG9H65KxRMoEf98CfZPwPB4rwbHqM7FErj8M"
 			]
 		},
 		"BigPictureFactory.sol": {

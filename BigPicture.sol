@@ -61,6 +61,20 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         onGoing = true;
     }
 
+    modifier isOnGoing {
+        require(onGoing == true, "The game was ended!");
+        _;
+    }
+
+    modifier notOwner {
+        require(msg.sender != owner(), "Game Creator is now allowed to play!");
+        _;
+    }
+
+    function getWinner() public view returns (address) {
+        return winner;
+    }
+
     function getOnGoingState() public view returns (bool) {
         return onGoing;
     }
@@ -69,7 +83,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         return BigPictureData(address(this), bigPictureName, image, picturePieces, rewardPrice, mintPrice);
     }
 
-    function getYourTokens(address owner) public view returns (TokenData[] memory) {
+    function getYourTokens(address owner) isOnGoing public view returns (TokenData[] memory) {
         TokenData[] memory tokenList = new TokenData[](_nextTokenId);
 
         uint256 tokenCount = 0;
@@ -111,7 +125,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
 
     address public tempAddress;
 
-    function mintCMT () public payable {
+    function mintCMT () isOnGoing public payable {
         require(msg.sender.balance >= mintPrice, "Balance is not enough!");
         require(msg.value == mintPrice, "Value must be equal Mint Price!");
         tempAddress = msg.sender;
@@ -119,7 +133,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         requestRandomWords();
     }
 
-    function mintCMTDemo() public payable {
+    function mintCMTDemo() isOnGoing public payable {
         require(msg.sender.balance > mintPrice, "Balance is not enough!");
         require(msg.value == mintPrice, "Value must equal to Mint Price!");
         tempAddress = msg.sender;
@@ -133,20 +147,28 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         }
     }
 
-    function putTokenOnSale(uint256 tokenId, uint256 price) public {
+    modifier isTokenOwner(uint256 tokenId) {
         require(msg.sender == ownerOf(tokenId), "You must be the token's owner!");
+        _;
+    }
+
+    modifier notTokenOwner(uint256 tokenId) {
+        require(msg.sender != ownerOf(tokenId), "You must not be the token's owner!");
+        _;
+    }
+
+    function putTokenOnSale(uint256 tokenId, uint256 price) public isTokenOwner(tokenId) {
         onSale[tokenId] = true;
         tokenPrice[tokenId] = price;
         approve(address(this), tokenId);
     }
 
-    function unSell(uint256 tokenId) public {
-        require(msg.sender == ownerOf(tokenId), "You must be the token's owner!");
+    function unSell(uint256 tokenId) public isTokenOwner(tokenId) {
         onSale[tokenId] = false;
         tokenPrice[tokenId] = 0;
     }
 
-    function getTokensOnSale (address viewer) public view returns (TokenData[] memory) {
+    function getTokensOnSale (address viewer) isOnGoing public view returns (TokenData[] memory) {
         TokenData[] memory tokenList = new TokenData[](_nextTokenId);
 
         uint256 tokenCount = 0;
@@ -165,7 +187,7 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         return tokenList;
     }
 
-    function purchaseToken(uint256 tokenId) public payable {
+    function purchaseToken(uint256 tokenId) public notTokenOwner(tokenId) notOwner payable {
         require(msg.sender.balance > tokenPrice[tokenId], "Balance is not enough!");
         require(msg.value == tokenPrice[tokenId], "Value must equal to Selling Price!");
 
@@ -182,13 +204,13 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         onGoing = false;
     }
 
-    function claimReward() public winningCondition(msg.sender) {
+    function claimReward() public isOnGoing winningCondition notOwner {
         this.endGame(msg.sender);
         winner = msg.sender;
     }
 
-    modifier winningCondition(address claimer) {
-        TokenData[] memory tokenList = getYourTokens(claimer);
+    modifier winningCondition() {
+        TokenData[] memory tokenList = getYourTokens(msg.sender);
 
         bool[] memory isExisting = new bool[](picturePieces.length);
 
