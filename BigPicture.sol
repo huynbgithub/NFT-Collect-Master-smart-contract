@@ -71,6 +71,17 @@ contract BigPicture is VRFConsumerBase, ERC721URIStorage, Ownable {
         _;
     }
 
+    function getOwner() public view returns (address) {
+        return owner();
+    }
+
+    function isOwner(address checkAddress) public view returns (bool) {
+        if (checkAddress == owner()) {
+            return true;
+        } 
+        return false;
+    }
+
     function getWinner() public view returns (address) {
         return winner;
     }
